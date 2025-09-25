@@ -121,7 +121,7 @@ Examples:
   - In practice, one Pod = one main container (for simplicity, scaling).
   - Multi-container Pods are used for special cases (logging, proxying, adapters).
 
-  ---
+---
 
   🔑 Hidden Gems
 
@@ -137,6 +137,3 @@ Examples:
 - Create a new Namespace homework-ns and deploy Pod inside it.
 - Scale Pod → Convert it to a Deployment with 3 replicas.
 - Run kubectl get all -n homework-ns → Observe how resources are grouped.
-
----
-
