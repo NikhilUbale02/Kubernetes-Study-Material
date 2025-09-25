@@ -68,7 +68,51 @@ spec:                    # Specification of pod (what to run)
 
 🛠️ Mini Project
 - Goal: Deploy a simple Nginx web server in its own namespace.
-  1. Create a new namespace my-namespace.
-  2. Deploy an Nginx Pod in this namespace.
-  3. Expose Pod on port 80.
-  4. Verify pod & namespace isolation using kubectl get pods -n my-namespace.
+  - Create a new namespace my-namespace.
+  - Deploy an Nginx Pod in this namespace.
+  - Expose Pod on port 80.
+  - Verify pod & namespace isolation using kubectl get pods -n my-namespace.
+
+---
+
+🧠 Interview Tips
+
+❓ Q1: Difference between Pod, ReplicaSet, and Deployment?
+✅ Answer:
+  - Pod → The smallest deployable unit in Kubernetes. It represents one or more tightly coupled containers that share the same network namespace (IP, port space) and can communicate via localhost.
+
+  - ReplicaSet → Ensures that a specified number of replicas (copies) of a Pod are running at all times. If a Pod dies, the ReplicaSet automatically replaces it.
+
+  - Deployment → A higher-level abstraction that manages ReplicaSets. It adds powerful features like rolling updates, rollbacks, and versioned history.
+
+- Analogy:
+
+- Pod = a single worker.
+
+- ReplicaSet = ensures there are always enough workers available.
+
+- Deployment = the manager who decides how workers are hired, fired, promoted, or retrained (updates/rollbacks).
+
+❓ Q2: Why does Kubernetes use etcd?
+✅ Answer:
+  - etcd is a distributed, reliable key-value store that Kubernetes uses as its source of truth.
+  - Stores all cluster data: state of Pods, ConfigMaps, Secrets, Nodes, RBAC policies, etc.
+  - Provides strong consistency and fault tolerance using the Raft consensus algorithm.
+
+- Without etcd → Kubernetes would have no memory of desired or current state.
+In short → etcd = the “brain & memory” of Kubernetes.
+
+❓ Q3: Can multiple containers run inside a Pod? Why?
+✅ Answer:
+  - Yes, multiple containers can run inside a single Pod.
+  - They share:
+    - Same network namespace (IP address, ports).
+    - Same storage volumes (if defined).
+  - Typical use case = when containers are tightly coupled and must share resources.
+
+Examples:
+  - Sidecar pattern: One container runs the app, another logs or proxies traffic.
+  - Init containers: Prepares environment before main container starts.
+- Why not always do this?
+  - In practice, one Pod = one main container (for simplicity, scaling).
+  - Multi-container Pods are used for special cases (logging, proxying, adapters).
