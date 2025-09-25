@@ -93,6 +93,8 @@ spec:                    # Specification of pod (what to run)
 
 - Deployment = the manager who decides how workers are hired, fired, promoted, or retrained (updates/rollbacks).
 
+---
+
 ❓ Q2: Why does Kubernetes use etcd?
 ✅ Answer:
   - etcd is a distributed, reliable key-value store that Kubernetes uses as its source of truth.
@@ -101,6 +103,8 @@ spec:                    # Specification of pod (what to run)
 
 - Without etcd → Kubernetes would have no memory of desired or current state.
 In short → etcd = the “brain & memory” of Kubernetes.
+
+---
 
 ❓ Q3: Can multiple containers run inside a Pod? Why?
 ✅ Answer:
@@ -116,3 +120,23 @@ Examples:
 - Why not always do this?
   - In practice, one Pod = one main container (for simplicity, scaling).
   - Multi-container Pods are used for special cases (logging, proxying, adapters).
+
+  ---
+
+  🔑 Hidden Gems
+
+- kubectl explain pod.spec.containers → Explains YAML fields (gold for exam prep).
+- Use kubectl run for quick testing, but always prefer YAML for production.
+
+---
+
+🏡 Homework (5 Tasks)
+
+- Write YAML for a Pod running nginx:latest and apply it.
+- Modify Pod YAML to run two containers in the same Pod.
+- Create a new Namespace homework-ns and deploy Pod inside it.
+- Scale Pod → Convert it to a Deployment with 3 replicas.
+- Run kubectl get all -n homework-ns → Observe how resources are grouped.
+
+---
+
